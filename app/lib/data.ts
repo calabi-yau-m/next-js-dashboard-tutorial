@@ -9,6 +9,11 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
+const url = process.env.POSTGRES_URL;
+if (!url) {
+  throw new Error('POSTGRES_URL is not set. Add it in Vercel → Settings → Environment Variables and redeploy.');
+}
+
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 export async function fetchRevenue() {
